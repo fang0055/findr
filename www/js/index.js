@@ -1,10 +1,7 @@
 let app = {
-    map: "",
-    // APIKey: "js?key=AIzaSyBksheP1AaeyshQdY1ZWlgk73ZicfBl3iE",
-    
+    map: "",    
     latVal: 45.3496711,
     lngVal: -75.7569551,
-    // infowindow: "",
     marker: "",
     markers: [],
     markerLocals: [],
@@ -51,7 +48,42 @@ let app = {
             disableDoubleClickZoom: true
         });
 
+        app.checkLocal();
         app.newInfoWindow();
+    },
+
+    checkLocal: function(){
+        console.log("Start to check!!!!!");
+        if(JSON.parse(localStorage.getItem("markersKey"))){
+            console.log(JSON.parse(localStorage.getItem("markersKey")));
+            app.createWithLocal();
+        } else {
+            console.log("Noting in local storage!");
+        }
+    },
+
+    createWithLocal: function(){
+        app.markerLocals = JSON.parse(localStorage.getItem("markersKey"));
+        app.markerLocals.forEach( (item)=>{
+            let marker = new google.maps.Marker({
+                id: item.id,
+                animation: google.maps.Animation.DROP,
+                position: item.position,
+                map: app.map,
+                title: item.title
+            });
+
+            marker.addListener('click', () => {
+                infowindow = new google.maps.InfoWindow({
+                    content: item.title,
+                    position: item.position
+                });
+                infowindow.open(app.map, marker);
+            });
+            marker.addListener('mouseout', () => {
+                infowindow.close(app.map, marker);
+            });
+        })
     },
 
     newInfoWindow: function(){
@@ -64,11 +96,6 @@ let app = {
             infoContent.appendChild(inputBox);
             infoContent.appendChild(saveBtn);
             document.querySelector("body").appendChild(infoContent);
-            saveBtn.addEventListener("click", ()=>{
-                app.markerTitle = inputBox.value;
-                infowindow.close(app.map);
-                app.newMarker(ev);
-            });
 
             infowindow = new google.maps.InfoWindow({
                 content: infoContent,
@@ -79,11 +106,11 @@ let app = {
                 infowindow.close(app.map);
             });
 
-            // let infoContent = document.querySelector(".inputCtn");
-            // let saveBtn = document.createElement("button");
-            // saveBtn.textContent = "Save";
-            // infoContent.appendChild(saveBtn);
-
+            saveBtn.addEventListener("click", ()=>{
+                app.markerTitle = inputBox.value;
+                infowindow.close(app.map);
+                app.newMarker(ev);
+            });
         });
     },
 
@@ -109,12 +136,11 @@ let app = {
         localStorage.setItem("markersKey", JSON.stringify(app.markerLocals));
         console.log(JSON.parse(localStorage.getItem("markersKey")));
 
-        infowindow = new google.maps.InfoWindow({
-        content: marker.title,
-        position: ev.latLng
-        });
-
-        marker.addListener('click', () => {
+        marker.addListener('click', (ev) => {
+            infowindow = new google.maps.InfoWindow({
+                content: marker.title + "<button></button>",
+                position: marker.position
+                });
             infowindow.open(app.map, marker);
         });
 
