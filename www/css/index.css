@@ -26,3 +26,40 @@ body {
     width: 100vw;
     height: 94vh;
 }
+
+.infoContent{
+    display: flex;
+    flex-direction: row;
+}
+
+.inputBox{
+    font-size: 0.75rem;
+    border: none;
+    border-bottom: 2px solid hsla(175, 0%, 55%, 1.0);
+    transition: all 0.75s ease-out;
+}
+
+.inputBox:hover{
+    outline: none;
+    border-bottom: 2px solid hsla(175, 80%, 30%, 1.0);
+    transition: all 0.75s ease-out;
+}
+
+.saveBtn{
+    font-size: 0.75rem;
+    background-color: hsla(175, 80%, 30%, 1.0);
+    border: 0 solid hsla(175, 0%, 0%, 0);
+    margin-left: 1rem;
+    color: white;
+    border-radius: 4px;
+}
+
+.deleteBtn{
+    font-size: 0.85rem;
+    margin: 0 0.25rem 0 1rem;
+}
+
+.infoCtn{
+    display: flex;
+    flex-direction: row;
+}

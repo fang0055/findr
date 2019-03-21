@@ -53,12 +53,11 @@ let app = {
     },
 
     checkLocal: function(){
-        console.log("Start to check!!!!!");
-        if(JSON.parse(localStorage.getItem("markersKey"))){
-            console.log(JSON.parse(localStorage.getItem("markersKey")));
+        let i = JSON.parse(localStorage.getItem("markersKey"));
+        if(i.length > 0){
             app.createWithLocal();
         } else {
-            console.log("Noting in local storage!");
+            console.log("Noting in local storage");
         }
     },
 
@@ -72,30 +71,55 @@ let app = {
                 map: app.map,
                 title: item.title
             });
-
-            marker.addListener('click', () => {
-                infowindow = new google.maps.InfoWindow({
-                    content: item.title,
-                    position: item.position
-                });
-                infowindow.open(app.map, marker);
-            });
-            marker.addListener('mouseout', () => {
-                infowindow.close(app.map, marker);
-            });
+            app.markers.push(marker);
+            app.infowindowShowNHide(marker);
         })
+    },
+
+    infowindowShowNHide: function (ev){
+        let marker = ev;
+        marker.addListener('click', () => {
+            let documentFragment = new DocumentFragment();
+            let infoCtn = document.createElement("div");
+            let infoTtile = document.createElement("div");
+            let deleteBtn = document.createElement("i");
+            infoCtn.className = "infoCtn";
+            infoTtile.className = "infoTitle";
+            deleteBtn.className = "far fa-trash-alt deleteBtn";
+            infoTtile.textContent = marker.title;
+            infoCtn.appendChild(infoTtile);
+            infoCtn.appendChild(deleteBtn);
+            documentFragment.appendChild(infoCtn);
+            document.querySelector("body").appendChild(documentFragment);
+
+            infowindow = new google.maps.InfoWindow({
+                content: infoCtn,
+                position: marker.position
+                });
+            deleteBtn.setAttribute("data-id", marker.id);
+            deleteBtn.addEventListener("click", app.deleteInfo);
+            infowindow.open(app.map, marker);
+        });
+        marker.addListener('mouseout', () => {
+            infowindow.close(app.map, marker);
+        });
     },
 
     newInfoWindow: function(){
         google.maps.event.addListener(app.map, 'dblclick', function(ev) {
+            let documentFragment = new DocumentFragment();
             let infoContent = document.createElement("div");
             let inputBox = document.createElement("input");
             let saveBtn = document.createElement("button");
             inputBox.type = "text";
             saveBtn.textContent = "Save";
+            inputBox.className = "inputBox";
+            saveBtn.className = "saveBtn";
+            infoContent.className = "infoContent";
             infoContent.appendChild(inputBox);
             infoContent.appendChild(saveBtn);
-            document.querySelector("body").appendChild(infoContent);
+            documentFragment.appendChild(infoContent);
+            document.querySelector("body").appendChild(documentFragment);
 
             infowindow = new google.maps.InfoWindow({
                 content: infoContent,
@@ -131,22 +155,19 @@ let app = {
 
         app.markers.push(marker);
         app.markerLocals.push(markerLocal);
-        console.log(app.markers);
-        console.log(app.markerLocals);
         localStorage.setItem("markersKey", JSON.stringify(app.markerLocals));
-        console.log(JSON.parse(localStorage.getItem("markersKey")));
 
-        marker.addListener('click', (ev) => {
-            infowindow = new google.maps.InfoWindow({
-                content: marker.title + "<button></button>",
-                position: marker.position
-                });
-            infowindow.open(app.map, marker);
-        });
+        app.infowindowShowNHide(marker);
+    },
 
-        marker.addListener('mouseout', () => {
-            infowindow.close(app.map, marker);
-        });
+    deleteInfo: function (){
+        let id = document.querySelector(".deleteBtn").getAttribute("data-id");
+        let i = app.markers.findIndex(item => item.id == id);
+
+        app.markers[i].setMap(null);
+        app.markers.splice(i,1);
+        app.markerLocals.splice(i,1);
+        localStorage.setItem("markersKey", JSON.stringify(app.markerLocals));
     }
 }
 
