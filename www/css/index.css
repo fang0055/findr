@@ -24,6 +24,7 @@ body {
 }
 
 .loadingAnimation{
+    z-index: 1000;
     position: fixed;
     width: 2rem;
     height: 2rem;
@@ -114,8 +115,6 @@ body {
 
 }
 
-
-
 .map {
     /* display: none; */
     margin-top: 6vh;
@@ -130,6 +129,7 @@ body {
 
 .inputBox{
     font-size: 0.75rem;
+    width: 6rem;
     border: none;
     border-bottom: 2px solid hsla(175, 0%, 55%, 1.0);
     transition: all 0.75s ease-out;
@@ -138,6 +138,7 @@ body {
 .inputBox:hover{
     outline: none;
     border-bottom: 2px solid hsla(175, 80%, 30%, 1.0);
+    border-radius: 0px;
     transition: all 0.75s ease-out;
 }
 
@@ -151,19 +152,26 @@ body {
     font-size: 0.75rem;
     background-color: hsla(175, 80%, 30%, 1.0);
     border: 0 solid hsla(175, 0%, 0%, 0);
-    margin-left: 1rem;
+    margin: 0 0.5rem 0 1rem;
+    padding: 0.25rem 0.75rem;
     color: white;
     border-radius: 4px;
-}
-
-.deleteBtn{
-    font-size: 0.85rem;
-    margin: 0 0.25rem 0 1rem;
 }
 
 .infoCtn{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.deleteBtn{
+    font-size: 0.85rem;
+    margin: 0.25rem 0.75rem 0.35rem 1rem;
+}
+
+.infoTitle{
+    margin: 0;
 }
 
 .disappear{

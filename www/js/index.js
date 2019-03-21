@@ -54,10 +54,14 @@ let app = {
     },
 
     checkLocal: function(){
-        let i = JSON.parse(localStorage.getItem("markersKey"));
-        if(i.length > 0){
-            app.createWithLocal();
-        } else {
+        if (JSON.parse(localStorage.getItem("markersKey"))){
+            let i = JSON.parse(localStorage.getItem("markersKey"));
+            if(i.length > 0){
+                app.createWithLocal();
+            } else {
+                console.log("Noting in local storage");
+            }
+        } else{
             console.log("Noting in local storage");
         }
     },
