@@ -10,6 +10,7 @@ let app = {
     markersKey: "markersKey",
 
     init: function (){
+        document.querySelector(".loadingAnimation").classList.remove("disappear");
         app.ready();
     },
 
@@ -47,7 +48,7 @@ let app = {
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             disableDoubleClickZoom: true
         });
-
+        document.querySelector(".loadingAnimation").classList.add("disappear");
         app.checkLocal();
         app.newInfoWindow();
     },
@@ -129,6 +130,11 @@ let app = {
             app.map.addListener("click", ()=>{
                 infowindow.close(app.map);
             });
+
+            // infowindow.addListener("mouseout", ()=>{
+            //     console.log("mouseout?????");
+            //     infowindow.close(app.map);
+            // });
 
             saveBtn.addEventListener("click", ()=>{
                 app.markerTitle = inputBox.value;
