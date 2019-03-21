@@ -34,7 +34,6 @@ let app = {
                     rej("FAIL");
                 }, opts);
         });
-
         getPostion.then( app.newMap() ); 
     },
 
