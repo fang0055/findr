@@ -163,15 +163,28 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    font-weight: 400;
 }
 
 .deleteBtn{
-    font-size: 0.85rem;
-    margin: 0.25rem 0.75rem 0.35rem 1rem;
+    font-size: 0.95rem;
+    margin: 0.4rem 0.4rem 0.2rem 0.7rem;
+    padding: 0.45rem 0.5rem;
+    border-radius: 1px;
+    color: hsla(175, 0%, 28%, 1.0);    
+    transition: all 0.35s ease-out;
+}
+
+.deleteBtnRed{
+    border-radius: 50px;
+    background-color: red;
+    color: white;
+    transform: rotate(360deg);
+    transition: all 0.35s ease-out;
 }
 
 .infoTitle{
-    margin: 0;
+    margin: 0.15rem 0.5rem 0 0.5rem;
 }
 
 .disappear{

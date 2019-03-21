@@ -135,11 +135,6 @@ let app = {
                 infowindow.close(app.map);
             });
 
-            // infowindow.addListener("mouseout", ()=>{
-            //     console.log("mouseout?????");
-            //     infowindow.close(app.map);
-            // });
-
             saveBtn.addEventListener("click", ()=>{
                 app.markerTitle = inputBox.value;
                 infowindow.close(app.map);
@@ -171,13 +166,18 @@ let app = {
     },
 
     deleteInfo: function (){
-        let id = document.querySelector(".deleteBtn").getAttribute("data-id");
-        let i = app.markers.findIndex(item => item.id == id);
+        if(document.querySelector(".deleteBtnRed")){
+            let id = document.querySelector(".deleteBtn").getAttribute("data-id");
+            let i = app.markers.findIndex(item => item.id == id);
+    
+            app.markers[i].setMap(null);
+            app.markers.splice(i,1);
+            app.markerLocals.splice(i,1);
+            localStorage.setItem("markersKey", JSON.stringify(app.markerLocals));
+        } else{
+            document.querySelector(".deleteBtn").classList.add("deleteBtnRed");
+        }
 
-        app.markers[i].setMap(null);
-        app.markers.splice(i,1);
-        app.markerLocals.splice(i,1);
-        localStorage.setItem("markersKey", JSON.stringify(app.markerLocals));
     }
 }
 
