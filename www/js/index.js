@@ -17,7 +17,7 @@ let app = {
     ready: async function() {
         const opts = {
             enableHighAccuracy: true,
-            timeout: 20000,
+            timeout: 10000,
             maximumAge: 1000 * 60 * 60 * 24
         };
 
@@ -34,7 +34,7 @@ let app = {
                     rej("FAIL");
                 }, opts);
         });
-        getPostion.then( app.newMap() ); 
+        getPostion.then( app.newMap() ).catch(app.newMap()); 
     },
 
     newMap: function(){
@@ -116,6 +116,7 @@ let app = {
             let inputBox = document.createElement("input");
             let saveBtn = document.createElement("button");
             inputBox.type = "text";
+            inputBox.placeholder = "Input the title";
             saveBtn.textContent = "Save";
             inputBox.className = "inputBox";
             saveBtn.className = "saveBtn";
@@ -135,9 +136,14 @@ let app = {
             });
 
             saveBtn.addEventListener("click", ()=>{
-                app.markerTitle = inputBox.value;
-                infowindow.close(app.map);
-                app.newMarker(ev);
+                // trim() refer to: https://www.geeksforgeeks.org/javascript-string-prototype-trim-function/
+                if (inputBox.value.trim().length > 0){
+                    app.markerTitle = inputBox.value;
+                    infowindow.close(app.map);
+                    app.newMarker(ev);
+                } else{
+                    alert("Please input something for the title.");
+                }
             });
         });
     },

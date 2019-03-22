@@ -26,8 +26,8 @@ body {
 .loadingAnimation{
     z-index: 1000;
     position: fixed;
-    width: 2rem;
-    height: 2rem;
+    width: 6vh;
+    height: 6vh;
     background-color: hsla(175, 80%, 30%, 1.0);
     border-radius: 50px;
     /* margin-top: 4rem; */
@@ -38,78 +38,78 @@ body {
     0%{
         background-color: hsla(175, 80%, 30%, 1.0);
         border-radius: 50px;
-        width: 2rem;
-        height: 2rem;
+        width: 6vw;
+        height: 6vw;
         transform: scale(1);
     }
     9%{
         background-color: hsla(175, 80%, 30%, 1.0);
         border-radius: 50px;
-        width: 2rem;
-        height: 2rem;
+        width: 6vw;
+        height: 6vw;
         transform: scale(0.5);
     }
     15%{
         background-color: hsla(190, 80%, 32.5%, 1.0);
         border-radius: 15px;
-        width: 4.5rem;
-        height: 2rem;
+        width: 12vw;
+        height: 6vw;
         transform: scale(1.3);
     }
     32%{
         background-color: hsla(210, 80%, 35%, 1.0);
         border-radius: 5px;
-        width: 4.5rem;
-        height: 2rem;
+        width: 12vw;
+        height: 6vw;
         transform: scale(1.4);
     }
     41%{
         background-color: hsla(175, 80%, 30%, 1.0);
         border-radius: 50px;
-        width: 2rem;
-        height: 2rem;
+        width: 6vw;
+        height: 6vw;
         transform: scale(0.5);
     }
     50%{
         background-color: hsla(175, 80%, 30%, 1.0);
         border-radius: 50px;
-        width: 2rem;
-        height: 2rem;
+        width: 6vw;
+        height: 6vw;
         transform: scale(1);
     }
     59%{
         background-color: hsla(175, 80%, 30%, 1.0);
         border-radius: 50px;
-        width: 2rem;
-        height: 2rem;
+        width: 6vw;
+        height: 6vw;
         transform: scale(0.5);
     }
     65%{
         background-color: hsla(160, 80%, 32.5%, 1.0);
         border-radius: 15px;
-        width: 2rem;
-        height: 4.5rem;
+        width: 6vw;
+        height: 12vw;
         transform: scale(1.3);
     }
     82%{
         background-color: hsla(140, 80%, 35%, 1.0);
         border-radius: 5px;
-        width: 2rem;
-        height: 4.5rem;
+        width: 6vw;
+        height: 12vw;
         transform: scale(1.4);
     }
     91%{
         background-color: hsla(175, 80%, 30%, 1.0);
         border-radius: 50px;
-        width: 2rem;
-        height: 2rem;
+        width: 6vw;
+        height: 6vw;
         transform: scale(0.5);
     }
     100%{
         background-color: hsla(175, 80%, 30%, 1.0);
         border-radius: 50px;
-        width: 2rem;
-        height: 2rem;
+        width: 6vw;
+        height: 6vw;
         transform: scale(1);
     }
 
