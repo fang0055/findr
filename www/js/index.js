@@ -34,7 +34,7 @@ let app = {
                     rej("FAIL");
                 }, opts);
         });
-        getPostion.then( app.newMap() ).catch(app.newMap()); 
+        getPostion.then( app.newMap ).catch(()=>{console.log("Failed to get current postion...");}); 
     },
 
     newMap: function(){
@@ -67,6 +67,7 @@ let app = {
 
     createWithLocal: function(){
         app.markerLocals = JSON.parse(localStorage.getItem("markersKey"));
+        console.log(app.markerLocals);
         app.markerLocals.forEach( (item)=>{
             let marker = new google.maps.Marker({
                 id: item.id,
@@ -171,18 +172,17 @@ let app = {
     },
 
     deleteInfo: function (){
-        if(document.querySelector(".deleteBtnRed")){
+        if(!document.querySelector(".deleteBtnRed")){
+            document.querySelector(".deleteBtn").classList.add("deleteBtnRed");
+        } else{
             let id = document.querySelector(".deleteBtn").getAttribute("data-id");
             let i = app.markers.findIndex(item => item.id == id);
-    
+
             app.markers[i].setMap(null);
             app.markers.splice(i,1);
             app.markerLocals.splice(i,1);
             localStorage.setItem("markersKey", JSON.stringify(app.markerLocals));
-        } else{
-            document.querySelector(".deleteBtn").classList.add("deleteBtnRed");
         }
-
     }
 }
 
